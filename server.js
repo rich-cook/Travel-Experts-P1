@@ -9,12 +9,15 @@ var FileAPI = require('file-api')
   , FileList = FileAPI.FileList
   ;
 
-let table = {};
+let packagesTable = {};
+
 app.use(express.static("public", { "extensions": ["css", "js"] }));
 app.use(express.static("views", { "extensions": ["html", "htm", "ejs"] }));
 app.set("view engine", "ejs");
 
 app.listen(8000, ()=>{ console.log("server started on port 8000"); });
+
+
 
 var getConnection = ()=>{
 	return mysql.createConnection({
@@ -38,11 +41,11 @@ app.get("/", (req, res)=>{
 				if(err){
 					throw err;
 				}
-				table = result;	
+				packagesTable = result;	
 			});
 		});
 		
-		res.render("../index", {table : table});
+		res.render("../index", {packagesTable : packagesTable});
 	});
 
 app.use((req, res, next)=>{

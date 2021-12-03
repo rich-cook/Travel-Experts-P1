@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%- include("views/partials/head.ejs"); %>
+	<%- include("views/partials/head.ejs"); %>
 </head>
 <body>
 	<header>
@@ -11,42 +11,52 @@
 	<!-- @@@ Main container @@@ -->
 	<main role="main">
 		<!-- Jumbotron -->
-		<section class="jumbotron text-center custom-jumbotron">
+		<section class="jumbotron text-center custom-jumbotron pb-2">
 			<div class="container">
 				<h1 class="display-4">Welcome to Travel Experts!</h1>
 				<div class="d-flex justify-content-center">
 					<p class="lead text-muted col-sm-6 col-md-4">Some inspirational quote that is meant to elicit feelings of wanderlust. We then have a call to action in order to drive sales.</p>
 					
 				</div>
-				<a href="#" class="btn btn-primary my-2">Discover</a>
-				<a href="register.html" class="btn btn-success my-2">Book Now</a>
+				<a href="#" class="btn btn-primary my-2">Discover Destinations</a>
 			</div>
 		</section>
 
 		<!-- Thumbnail section -->
 		<section class="album py-5 bg-light">
 			<div class="container">
-				<div class="row" id="thumbnailDiv">
-					<!-- createThumbnails() populates this area -->
+				<div class="row">
+					<% Object.keys(packagesTable).forEach(function(key){ %>		
+						<%	var row = packagesTable[key]; %>
+						<%	var thumb = row.PkgThumbnail; %>
+						<%	var desc = row.PkgDesc; %>
+
+						<div class='col-md-4'>
+							<div class="card mb-4 box-shadow">
+								<%- "<img class='card-img-top' style='height: 225px; width: 100%; display: block;' src=images/" + thumb + ">" %>
+								<div class="card-body">
+									<%- "<h2 class='p-2 card-text text-center'>" + desc + "</h2>" %>
+									<div class="d-flex justify-content-center align-items-center">
+										
+										<button type="button" class="btn btn-sm btn-success">Book Now!</button>
+										
+										
+										
+									</div>
+								</div>
+							</div>
+							
+
+							
+						</div>
+					<% }); %>
 				</div>
 			</div>
 		</section>
 	</main>
-	
+
 	<footer>
 		<%- include("views/partials/footer.ejs"); %>
 	</footer>
-
-	<% Object.keys(table).forEach(function(key){ %>		
-		<% var row = table[key]; %>
-		<% var elem = row.PkgThumbnail %>
-		<%- "<img src=/images/" + elem + "></img>" %>
-		
-		<% table[key] %>
-		
-
-	<% }); %>
-	
-
 </body>
 </html>
