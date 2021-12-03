@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<%- include("views/partials/head.ejs"); %>
+</head>
+<body>
+	<header>
+		<%- include("views/partials/header.ejs"); %>
+	</header>
+
+	<!-- @@@ Main container @@@ -->
+	<main role="main">
+		<!-- Jumbotron -->
+		<section class="jumbotron text-center custom-jumbotron">
+			<div class="container">
+				<h1 class="display-4">Welcome to Travel Experts!</h1>
+				<div class="d-flex justify-content-center">
+					<p class="lead text-muted col-sm-6 col-md-4">Some inspirational quote that is meant to elicit feelings of wanderlust. We then have a call to action in order to drive sales.</p>
+					
+				</div>
+				<a href="#" class="btn btn-primary my-2">Discover</a>
+				<a href="register.html" class="btn btn-success my-2">Book Now</a>
+			</div>
+		</section>
+
+		<!-- Thumbnail section -->
+		<section class="album py-5 bg-light">
+			<div class="container">
+				<div class="row" id="thumbnailDiv">
+					<!-- createThumbnails() populates this area -->
+				</div>
+			</div>
+		</section>
+	</main>
+	
+	<footer>
+		<%- include("views/partials/footer.ejs"); %>
+	</footer>
+
+	<% Object.keys(table).forEach(function(key){ %>		
+		<% var row = table[key]; %>
+		<% var elem = row.PkgThumbnail %>
+		<%- "<img src=/images/" + elem + "></img>" %>
+		
+		<% table[key] %>
+		
+
+	<% }); %>
+	
+
+</body>
+</html>
