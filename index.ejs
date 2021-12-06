@@ -26,10 +26,10 @@
 		<section class="album py-5 bg-light">
 			<div class="container">
 				<div class="row">
-					<% Object.keys(packagesTable).forEach(function(key){ %>		
-						<%	var row = packagesTable[key]; %>
-						<%	var thumb = row.PkgThumbnail; %>
-						<%	var desc = row.PkgDesc; %>
+					<% Object.keys(packagesTable).forEach(function(key){ %>
+						<% var row = packagesTable[key]; %>
+						<% var thumb = row.PkgThumbnail; %>
+						<% var desc = row.PkgDesc; %>
 
 						<div class='col-md-4'>
 							<div class="card mb-4 box-shadow">
@@ -37,17 +37,21 @@
 								<div class="card-body">
 									<%- "<h2 class='p-2 card-text text-center'>" + desc + "</h2>" %>
 									<div class="d-flex justify-content-center align-items-center">
-										
-										<button type="button" class="btn btn-sm btn-success">Book Now!</button>
-										
-										
-										
+										<div class="col ms-auto">
+											<button type="button" class="btn btn-sm btn-success">Book Now!</button>
+										</div>
+										<div class="col">
+											<h6>Package available:</h6>
+											<div class="col">
+												From: <%- dayjs(row.PkgStartDate).format("DD-MM-YYYY"); %>
+											</div>
+											<div class="col">
+												To: <%- dayjs(row.PkgEndDate).format("DD-MM-YYYY"); %>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
-							
-
-							
 						</div>
 					<% }); %>
 				</div>

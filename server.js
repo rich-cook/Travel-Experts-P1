@@ -1,6 +1,10 @@
 const express = require("express");
 const app = express();
 
+const dayjs = require("dayjs");
+const customParseFormat = require("dayjs/plugin/customParseFormat");
+dayjs.extend(customParseFormat);
+dayjs().format();
 const fs = require("fs");
 const mysql = require("mysql");
 const FileReader = require('filereader');
@@ -47,7 +51,7 @@ app.get("/", (req, res)=>{
 			});
 		});
 		
-		res.render("../index", {packagesTable : packagesTable});
+		res.render("../index", {packagesTable: packagesTable, dayjs: dayjs});
 	});
 
 app.use((req, res, next)=>{
