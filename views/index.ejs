@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Travel Experts</title>
+	</head>
+	<body style="background-color:white; color:black;">
+		<h1>The Usual Agencies</h1>
+		<!-- @@@ Navbar @@@ -->
+    <header>
+        <!-- Collapsable menu for small screens, toggle with hamburger -->
+        <div class="collapse navbar-light bg-white" id="navbar_header">
+            <div class="container">
+                <nav>
+                    <div class="d-flex justify-content-end">
+                        <ul class="navbar-nav">
+                            <div class="row">
+                                <li class="col nav-item">
+                                    <a href="contact.html" class="nav-link">Contact</a>
+                                </li>
+                                <li class="col nav-item">
+                                    <a href="register.html" class="nav-link">Register</a>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!--Main Navbar w/ hamburger on small screens -->
+        <div class="navbar navbar-expand-lg navbar-light bg-white">
+            <div class="container">
+                <a href="index.html" class="navbar-brand">
+                    <img src="../img/logo.png" class="" width="72" height="72" />
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_header">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <ul class="navbar-nav d-none d-lg-block">
+                    <div class="row">
+                        <li class="col nav-item">
+                            <a href="contact.html" class="nav-link">Contact</a>
+                        </li>
+                        <li class="col nav-item">
+                            <a href="register.html" class="nav-link">Register</a>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </header>
+		<table border="1">
+			<% for (let agencies of result) { %>
+				<tr>
+				<% for (let key in agencies) {
+					if (agencies.hasOwnProperty(key)) { %>
+						<td><%= agencies[key] %></td>
+				<%	}
+				} %>
+				</tr>
+			<% } %>
+		</table>
+
+		<footer>
+			Copyright 2021 &copy;
+		</footer>
+	</body>
+</html>
