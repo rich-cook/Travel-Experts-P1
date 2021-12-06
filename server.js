@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+
 const fs = require("fs");
 const mysql = require("mysql");
 const FileReader = require('filereader');
@@ -9,6 +10,7 @@ var FileAPI = require('file-api')
   , FileList = FileAPI.FileList
   ;
 
+//Table that is served to the client
 let packagesTable = {};
 
 app.use(express.static("public", { "extensions": ["css", "js"] }));
@@ -18,7 +20,7 @@ app.set("view engine", "ejs");
 app.listen(8000, ()=>{ console.log("server started on port 8000"); });
 
 
-
+//Always hardcode your passwords for extra security ;)
 var getConnection = ()=>{
 	return mysql.createConnection({
 		host: "localhost",
