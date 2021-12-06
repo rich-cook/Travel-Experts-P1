@@ -1,6 +1,10 @@
 const express = require("express");
 const app = express();
 
+const dayjs = require("dayjs");
+const customParseFormat = require("dayjs/plugin/customParseFormat");
+dayjs.extend(customParseFormat);
+dayjs().format();
 const fs = require("fs");
 const mysql = require("mysql");
 const FileReader = require('filereader');
@@ -31,24 +35,26 @@ var getConnection = ()=>{
 };
 
 app.get("/", (req, res)=>{
-		var connection = getConnection();
+	var connection = getConnection();
 
-		connection.connect( (err)=>{
+	connection.connect( (err)=>{
 
+		if(err){
+			throw err;
+		}
+		var sql = "SELECT * FROM packages WHERE PkgEndDate > CURDATE()";
+
+		connection.query(sql, (err, result, fields)=>{
 			if(err){
 				throw err;
 			}
-			var sql = "SELECT * FROM packages";
-			connection.query(sql, (err, result, fields)=>{
-				if(err){
-					throw err;
-				}
-				packagesTable = result;	
-			});
+			console.log(result);
+			packagesTable = result;	
 		});
-		
-		res.render("../index", {packagesTable : packagesTable});
 	});
+	
+	res.render("../index", {packagesTable: packagesTable, dayjs: dayjs});
+});
 
 app.use((req, res, next)=>{
 	res.status(404).render("404");

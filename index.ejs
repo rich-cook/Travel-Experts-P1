@@ -26,28 +26,45 @@
 		<section class="album py-5 bg-light">
 			<div class="container">
 				<div class="row">
-					<% Object.keys(packagesTable).forEach(function(key){ %>		
-						<%	var row = packagesTable[key]; %>
-						<%	var thumb = row.PkgThumbnail; %>
-						<%	var desc = row.PkgDesc; %>
+					<% Object.keys(packagesTable).forEach(function(key){ %>
+						<% var row = packagesTable[key]; %>
+						<% var thumb = row.PkgThumbnail; %>
+						<% var title = row.PkgName; %>
+						<% var desc = row.PkgDesc; %>
+						<% var price = new Intl.NumberFormat("en-CA", { style: 'currency', currency: 'CAD' }).format(row.PkgBasePrice); %>
+						<% var sDate = dayjs(row.PkgStartDate).format("MMM D YYYY"); %>
+						<% var eDate = dayjs(row.PkgEndDate).format("MMM D YYYY"); %>
 
 						<div class='col-md-4'>
 							<div class="card mb-4 box-shadow">
 								<%- "<img class='card-img-top' style='height: 225px; width: 100%; display: block;' src=images/" + thumb + ">" %>
 								<div class="card-body">
-									<%- "<h2 class='p-2 card-text text-center'>" + desc + "</h2>" %>
+									<%- "<h2 class='p-2 card-text text-center'>" + title + "</h2>" %>
+									<%- "<h5 class='card-text text-center text-muted'>" + desc + "</h5>" %>
 									<div class="d-flex justify-content-center align-items-center">
-										
-										<button type="button" class="btn btn-sm btn-success">Book Now!</button>
-										
-										
-										
+										<div class="col d-flex justify-content-center p-4">
+											<button type="button" class="btn btn-lg btn-success">Book Now!</button>
+										</div>
+										<div class="col p-4">
+											<%- "<h5 class='card-text text-center'>" + price + " CAD</h5>" %>
+											
+											<% if(dayjs().isAfter(sDate)){ %>
+												<strong>From: </strong><strong style="color:red; "><%- sDate %></strong>
+											<% } else{ %>
+												<strong>From: </strong><text><%- sDate %></text>
+											<% } %>
+											<br />
+											<strong>To: </strong> <%- eDate %>
+											<div class="col">
+												
+											</div>
+											<div class="col">
+												
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
-							
-
-							
 						</div>
 					<% }); %>
 				</div>
