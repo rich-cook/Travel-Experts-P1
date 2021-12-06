@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="public/masterstyle.css">
+    </head>
+    <body>
+        <!-- NAVBAR SECTION -->
+        <!-- navbar-expand-md hamburger menu -->
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-sm">
+                <a href="index" class="navbar-brand mb-sm-1"><img src="/assets/travel.png" class="d-inline-block" width="45" height= "40"/> Travel Experts</a>                       
+                <!-- button on the side -->
+                <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_header" aria-controls="navbarNav" aria-expanded="false" aria-label="toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button> 
+                <!-- responsive with navbarNav bootstrap id that initiates hamburger menu on a small screen  -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mb-md-1">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="index">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="vacationpackages">Vacation Packages</a></li>
+                        <li class="nav-item"><a class="nav-link" href="register">Register</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Outputs a deal depending on the time of year using the getMonth method -->
+        <div class="col-sm-12 text-center bg-light container-fluid m-1">
+            <a href="vacationpackages" class= "h5" ><p id="deal" class="text-center" ></p></a>
+               <script type = "text/javascript">
+              
+                /* $(document).on('click','.navbar-collapse.in',function(e) {
+                    if( $(e.target).is('a') ) {
+                        $(this).collapse('hide');
+                    }
+                }); */
+
+
+
+
+
+
+                var dealHeaders = new Array();
+                var dealHeaders = ["It's Halloween!", "Escape the cold, fly to our beach destinations","10% off when you register", "Christmas Vacation Specials!"];
+                var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+              
+                var dealDate = new Date();
+                let dealName = month[dealDate.getMonth()];
+                console.log(dealName);       
+                
+                if (dealName == "December"){
+                    
+                    document.getElementById("deal").innerHTML = dealHeaders[3];
+                    
+                } 
+                else if (dealName = ("January" || "February")){
+                    
+                    document.getElementById("deal").innerHTML = dealHeaders[1];
+                    //document.getElementById("bg").bgColor = "blue"
+                }
+                else if (dealName = "October"){
+                    
+                    document.getElementById("deal").innerHTML = dealHeaders[0];
+                    //document.getElementById("bg").bgColor = "black"
+                }
+                else if (dealName){
+                    
+                    document.getElementById("deal").innerHTML = dealHeaders[2];
+                  
+                } 
+            
+                </script>             
+        </div> 
+
+            <!-- Section with the planes -->
+            
+        <div class="col-sm-12 container-sm rounded-3">
+            <img src="/assets/backplanes2.png" class="img-fluid">
+                  
+        </div>  
+        
+        <!-- Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+</html>
+
+
+  
