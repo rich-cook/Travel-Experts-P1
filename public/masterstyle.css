@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+#body {
+  padding-bottom: 20px;
+  
+}
+
+#navbarbg {
+    background-color: rgba(251, 251, 247, 0.246) !important;
+}
+.body1 {
+  background-color: rgba(182, 140, 76, 0.609)
+  color: black;
+  margin-left:auto;
+  border: 1px;
+}
+
+.full-img {
+  width: 90%;
+  object-fit: cover;
+  height: 200px;
+  opacity: 0.6;
+  margin-left: 5%;
+  border-radius:20px;
+  
+}
+
+.h_divider {
+  margin-top: 15px;
+}
+h1 {
+  text-align: center;
+  color:#131a17;
+}
+.backgroundplanes{
+  width: 90%;
+  object-fit: cover;
+  opacity: 0.2;
+  height: 100px; /* only if you want fixed height */
+  }
+.formpic{
+  padding-right: 45rem;
+  align: center;
+  color:red;
+  width: "80%";
+  
+
+}
+.hoverlayer{
+  background:gray;
+              
+}
+.hoverlayer:hover{
+
+  opacity:0.7;
+}
+
+.textoverimg {
+  background-image: url(assets/hike1.jpg);
+  background-size: cover;
+}
+
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
