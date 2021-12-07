@@ -16,9 +16,10 @@ var FileAPI = require('file-api')
 
 //Table that is served to the client
 let packagesTable = {};
+let agenciesTable = {};
 
 app.use(express.static("public", { "extensions": ["css", "js"] }));
-app.use(express.static("views", { "extensions": ["html", "htm", "ejs"] }));
+app.use(express.static("views", { "extensions": ["html", "htm"] }));
 app.set("view engine", "ejs");
 
 app.listen(8000, ()=>{ console.log("server started on port 8000"); });
@@ -48,12 +49,35 @@ app.get("/", (req, res)=>{
 			if(err){
 				throw err;
 			}
-			console.log(result);
 			packagesTable = result;	
+			res.render("../index", {packagesTable: packagesTable, dayjs: dayjs});
 		});
 	});
 	
-	res.render("../index", {packagesTable: packagesTable, dayjs: dayjs});
+	
+});
+
+app.get("/contact", (req, res)=>{
+	var connection = getConnection();
+
+	connection.connect( (err)=>{
+
+		if(err){
+			throw err;
+		}
+		var sql = "select agencies.AgencyId, agencies.AgncyAddress, agencies.AgncyCity,agencies.AgncyProv, agencies.AgncyPostal, agencies.AgncyCountry, agencies.AgncyPhone, agencies.AgncyFax, agents.AgtFirstName, agents.AgtLastName, agents.AgtBusPhone, agents.AgtEmail, agents.AgtPosition from agencies join agents on agents.AgencyId = agencies.AgencyId where agents.AgencyId = agencies.AgencyId order by agencies.agencyid;";
+
+		connection.query(sql, (err, result, fields)=>{
+			if(err){
+				throw err;
+			}
+
+			agenciesTable = result;	
+			console.log(agenciesTable);
+		});
+	});
+	
+	res.render("contact", {agenciesTable: agenciesTable, dayjs: dayjs});
 });
 
 app.use((req, res, next)=>{
