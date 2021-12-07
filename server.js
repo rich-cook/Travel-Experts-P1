@@ -88,7 +88,7 @@ app.get("/order", (req, res)=>{
 		if(err){
 			throw err;
 		}
-		var sql = "SELECT PkgDesc, PkgName FROM packages WHERE PackageId = " + req.query.pkgId;
+		//var sql = "SELECT PkgDesc, PkgName, PkgThumbnail FROM packages WHERE PackageId = " + req.query.pkgId;
 
 		connection.query(sql, (err, result, fields)=>{
 			if(err){
@@ -96,13 +96,49 @@ app.get("/order", (req, res)=>{
 			}
 			var desc = "";
 			var title = "";
+			var thumb = "";
+
 			Object.keys(result).forEach(function(key) {
 				var row = result[key];
 				desc = row.PkgDesc;
 				title = row.PkgName;
+				thumb = row.PkgThumbnail;
+
 			});
 			
-			res.render("order", {desc : desc, title : title});
+			res.render("order", {desc : desc, title : title, thumb : thumb});
+		});
+	});
+	
+	
+});
+
+app.post("/submit-order", (req, res)=>{
+	console.log("submit order");
+	var connection = getConnection();
+
+	connection.connect( (err)=>{
+
+		if(err){
+			throw err;
+		}
+
+		/*
+			BookingDate
+			BookingNo ???
+			TravelerCount
+			CustomerId
+			TripTypeId- Trip Types: Business, Group, Leisure
+			PackageId
+
+		*/
+		var sql = "INSERT INTO bookings (";
+
+		connection.query(sql, (err, result, fields)=>{
+			if(err){
+				throw err;
+			}
+			
 		});
 	});
 	
