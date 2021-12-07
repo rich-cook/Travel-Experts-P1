@@ -70,7 +70,6 @@ app.get("/contact", (req, res)=>{
 					+ "agents.AgtPosition, agents.AgtMiddleInitial " 
 					+ "from agencies join agents on agents.AgencyId = agencies.AgencyId " 
 					+ "where agents.AgencyId = agencies.AgencyId order by agencies.agencyid";
-		console.log(sql);
 		connection.query(sql, (err, result, fields)=>{
 			if(err){
 				throw err;
