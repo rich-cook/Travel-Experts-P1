@@ -18,8 +18,18 @@
 			<% var row = agenciesTable[key]; %>
 			<% var address = row.AgncyAddress; %>
 			<% var city = row.AgncyCity; %>
-			<div>This is the address: <%- address %></div>
-			<div>This is the city: <%- city %></div>
+			<% var postal = row.AgncyPostal; %>
+			<% var country = row.AgncyCountry; %>
+			<% var prov = row.AgncyProv; %>
+			<% var phone = row.AgncyPhone; %>
+			<% var fax = row.AgncyFax; %>
+			<div><%- address %></div>
+			<div><%- city %></div>
+			<div><%- postal %></div>
+			<div><%- country %></div>
+			<div><%- prov %></div>
+			<div><%- phone %></div>
+			<div><%- fax %></div>
 
 
 			<div class="container">
@@ -41,11 +51,12 @@
 					<div class="col-md-3">
 						<h4><%- city %></h4>
 						<ol>
-							<li>Coral Springs</li>
-							<li>750 N University Dr
-							Coral Springs FL 33071</li>
-							<li>(954)752-4188</li>
-							<li>Coral22@yahoo.com</li>
+							<li><%- address %></li>
+							<li><%- postal %></li>
+							<li><%- prov %></li>
+							<li><%- country %></li>
+							<li><%- phone %></li>
+							<li><%- fax %></li>
 						</ol>
 					</div>
 				</div>
