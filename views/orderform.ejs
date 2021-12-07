@@ -30,31 +30,31 @@
 					form1.CustomerId.focus();
 				}
 				
-				if (form1.Password.value == "")
+				if (form1.TripTypeId.value == "")
 				{
-					message += "Password must have a value";
-					form1.Password.focus();
+					message += "Trip Type must have a value";
+					form1.TripTypeId.focus();
 				}
 				
-				if (form1.TravellerAccount.value == "")
+				if (form1.UserName.value == "")
 				{
-					message += "Travel Account must have a value";
-					form1.TravellerAccount.focus();
+					message += "User Name Account must have a value";
+					form1.UserName.focus();
 				}
-                if (form1.CustNumber.value == "")
+        if (form1.TravelerCount.value == "")
 				{
 					message += "This must have a number";
-					form1.CustNumber.focus();
+					form1.TravelerCount.focus();
 				}
 				else
-				{
+				/* {
 					var reg = ^\d+$;
 					if (!reg.test(form1.CustNumber.value))
 					{
 						message += "Traveller Number has an invalid format";
 						form1.CustNumber.focus();
 					}
-				}
+				} */
 				
 				if (message != "")
 				{
@@ -93,34 +93,63 @@
                 </div>
                 <div class = "col-md-10 mt-3"></div>
                 
-                  <label for="Password">Password:</label>
+                 <!--  <label for="Password">Password:</label>
                   <input type="text" name="Password" id="Password"/><br />
-                  <div class = "col-md-10 mt-3"></div>
+                  <div class = "col-md-10 mt-3"></div> -->
 
-                  
+                 <!--  
                   <label for="TravellerAccount">Traveller Account:</label>
                   <input type="text" name="TravellerAccount" id="TravellerAccount"/><br />
-                
+ -->
                   <div class = "col-md-10 mt-3"></div>
 
-                  <label for="CustNumber">Number of People:</label>
-                  <input type="text" name="CustNumber" id="CustNumber" /><br />
+                  <div class="form-group">
+
+                    <label for="TripTypeId">Select from List:</label>
+                    <select class="form-control" id="TripTypeId">
+                      <option>Business</option>
+                      <option>Group</option>
+                      <option>Leisure</option>
+                    </select>
+                    <br>
+                  </div>
 
                   <div class = "col-md-10 mt-3"></div>
 
-                  <label for="PaymentMethod">Payment Method:</label>
-                  <input type="text" name="PaymentMethod" id="PaymentMethod" /><br />
+                  <label for="UserName">User Name</label>
+                  <input type="text" name="UserName" id="UserName" /><br />
 
                   <div class = "col-md-10 mt-3"></div>
 
-                  <div class="form-check mt-2 mb-2">
+                  <div class="form-group">
+
+                    <label for="TravelerCount">Number of Travelers:</label>
+                    <select class="form-control" id="TravelerCount">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                      <option>7</option>
+                      <option>8</option>
+                      <option>9</option>
+                      <option>10</option>
+                    </select>
+                    <br>
+                  </div>
+
+                  
+                  <div class = "col-md-10 mt-3"></div>
+
+                <!--   <div class="form-check mt-2 mb-2">
                       <input class="form-check-input" type="radio" name="PaymentMethod1" id="PaymentMethod1" value="option1" checked>
                       <label class="form-check-label" for="PaymentMethod1">Credit Card</label>
                   </div>
                   <div class="form-check mb-4">
                       <input class="form-check-input" type="radio" name="PaymentMethod2" id="PaymentMethod2" value="option2">
                       <label class="form-check-label" for="PaymentMethod2">Bank Payment</label>
-                  </div>
+                  </div> -->
 
                       <div class="d-grid gap-4 d-md-flex justify-content-md-start">
                         <button type="button" onclick="validate()" class="btn btn-primary btn-lg px-4 me-md-2">Send</button>
