@@ -115,7 +115,7 @@ app.get("/order", (req, res)=>{
 		if(err){
 			throw err;
 		}
-		//var sql = "SELECT PkgDesc, PkgName, PkgThumbnail FROM packages WHERE PackageId = " + req.query.pkgId;
+		var sql = "SELECT PkgDesc, PkgName, PkgThumbnail FROM packages WHERE PackageId = " + req.query.pkgId;
 
 		connection.query(sql, (err, result, fields)=>{
 			if(err){
@@ -142,6 +142,7 @@ app.get("/order", (req, res)=>{
 
 app.post("/submit-order", (req, res)=>{
 	console.log("submit order");
+	console.log(req.body.CustomerId);
 	var connection = getConnection();
 
 	connection.connect( (err)=>{
@@ -159,7 +160,8 @@ app.post("/submit-order", (req, res)=>{
 			PackageId
 
 		*/
-		var sql = "INSERT INTO bookings (";
+		
+		//var sql = "INSERT INTO bookings (";
 
 		connection.query(sql, (err, result, fields)=>{
 			if(err){
