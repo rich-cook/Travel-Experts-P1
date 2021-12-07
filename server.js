@@ -50,10 +50,11 @@ app.get("/", (req, res)=>{
 				throw err;
 			}
 			packagesTable = result;	
+			res.render("../index", {packagesTable: packagesTable, dayjs: dayjs});
 		});
 	});
 	
-	res.render("../index", {packagesTable: packagesTable, dayjs: dayjs});
+	
 });
 
 app.get("/contact", (req, res)=>{
@@ -64,7 +65,7 @@ app.get("/contact", (req, res)=>{
 		if(err){
 			throw err;
 		}
-		var sql = "SELECT * FROM agencies";
+		var sql = "select agencies.AgencyId, agencies.AgncyAddress, agencies.AgncyCity,agencies.AgncyProv, agencies.AgncyPostal, agencies.AgncyCountry, agencies.AgncyPhone, agencies.AgncyFax, agents.AgtFirstName, agents.AgtLastName, agents.AgtBusPhone, agents.AgtEmail, agents.AgtPosition from agencies join agents on agents.AgencyId = agencies.AgencyId where agents.AgencyId = agencies.AgencyId order by agencies.agencyid;";
 
 		connection.query(sql, (err, result, fields)=>{
 			if(err){
