@@ -13,53 +13,59 @@
 		<%- include("partials/header.ejs"); %>
 	</header>
 	<div class="container">
-		<div class="container">
+		
 
-			<div class="row">
+		<% for(i=0; i<agenciesTable.length; i++){ %>
+			<% var row = agenciesTable[i][0] %>
+			<% var agncyAddress = row.AgncyAddress %>
+			<% var agncyCity = row.AgncyCity %>
+			<% var agncyProv = row.AgncyProv %>
+			<% var agncyPostal = row.AgncyPostal %>
+			<% var agncyCountry = row.AgncyCountry %>
+			<% var agncyPhone = row.AgncyPhone %>
+			<% var agncyFax = row.AgncyFax %>
+			
+			<div class="row" style=" padding:30px 20px;">
 				<div class="col-md-3">
-
-				</div>
-				<div class="col-md-6">
-
-					<h1 style=" text-align:center; padding: 30px 30px;">Contact Details</h1>
-				</div>
-				<div class="col-md-3">
-
+					<h1>Agency Info:</h1>
+					<h4><%- agncyCity %>, <%- agncyProv %></h4>
+					<ol>
+						<li><%- agncyAddress %></li>
+						<li><%- agncyPostal %></li>
+						<li><%- agncyPhone %></li>
+						<li><%- agncyFax %></li>
+					</ol>
 				</div>
 			</div>
-
-		<% var i = 1 %>
-		<% Object.keys(agenciesTable).forEach(function(key){ %>
-			
-			<% var row = agenciesTable[key]; %>
-			<% Object.keys(agenciesTable).forEach(function(key){ %>
-				//Print agent info
-				<% var row1 = agenciesTable[key]; %>
-				<% var address = row.AgncyAddress; %>
-				<% var city = row.AgncyCity; %>
-				<div>This is the address: <%- address %></div>
-				<div>This is the city: <%- city %></div>
-
-
-				
-
-					<div class="row" style=" padding:30px 20px;">
+				<div class="row">
+				<% for(j=0; j<agenciesTable[i].length; j++){ %>
+					<% var row1 = agenciesTable[i][j] %>
+					<% var agtFirstName = row1.AgtFirstName %>
+					<% var agtMiddleInitial = row1.AgtMiddleInitial %>
+					<% var agtLastName = row1.AgtLastName %>
+					<% var agtBusPhone = row1.AgtBusPhone %>
+					<% var agtEmail = row1.AgtEmail %>
+					<% var agtPosition = row1.AgtPosition %>
+					
 						<div class="col-md-3">
-							<h4><%- city %></h4>
 							<ol>
-								<li>Coral Springs</li>
-								<li>750 N University Dr
-								Coral Springs FL 33071</li>
-								<li>(954)752-4188</li>
-								<li>Coral22@yahoo.com</li>
+								<li><%- agtFirstName %></li>
+								<li><%- agtMiddleInitial %></li>
+								<li><%- agtLastName %></li>
+								
+								<li><%- agtBusPhone %></li>
+								<li><%- agtEmail %></li>
+								<li><%- agtPosition %></li>
 							</ol>
 						</div>
-					</div>
+					
+
+				<% } %>
 				</div>
-			<% }); %>
-		<% }); %>
+		<% } %>
 
 		
+
 
 	</div>
 
