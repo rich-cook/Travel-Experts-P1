@@ -10,9 +10,9 @@ const mysql = require("mysql");
 const FileReader = require('filereader');
 let fileReader = new FileReader();
 var FileAPI = require('file-api')
-  , File = FileAPI.File
-  , FileList = FileAPI.FileList
-  ;
+, File = FileAPI.File
+, FileList = FileAPI.FileList
+;
 
 //Table that is served to the client
 let packagesTable = {};
@@ -23,7 +23,6 @@ app.use(express.static("views", { "extensions": ["html", "htm"] }));
 app.set("view engine", "ejs");
 
 app.listen(8000, ()=>{ console.log("server started on port 8000"); });
-
 
 //Always hardcode your passwords for extra security ;)
 var getConnection = ()=>{
@@ -65,7 +64,7 @@ app.get("/contact", (req, res)=>{
 		if(err){
 			throw err;
 		}
-		var sql = "select agencies.AgencyId, agencies.AgncyAddress, agencies.AgncyCity,agencies.AgncyProv, agencies.AgncyPostal, agencies.AgncyCountry, agencies.AgncyPhone, agencies.AgncyFax, agents.AgtFirstName, agents.AgtLastName, agents.AgtBusPhone, agents.AgtEmail, agents.AgtPosition from agencies join agents on agents.AgencyId = agencies.AgencyId where agents.AgencyId = agencies.AgencyId order by agencies.agencyid;";
+		var sql = "select agencies.AgencyId, agencies.AgncyAddress, agencies.AgncyCity,agencies.AgncyProv, agencies.AgncyPostal, agencies.AgncyCountry, agencies.AgncyPhone, agencies.AgncyFax, agents.AgtFirstName, agents.AgtLastName, agents.AgtBusPhone, agents.AgtEmail, agents.AgtPosition from agencies join agents on agents.AgencyId = agencies.AgencyId where agents.AgencyId = agencies.AgencyId order by agencies.agencyid";
 
 		connection.query(sql, (err, result, fields)=>{
 			if(err){
@@ -80,6 +79,37 @@ app.get("/contact", (req, res)=>{
 	res.render("contact", {agenciesTable: agenciesTable, dayjs: dayjs});
 });
 
+app.get("/order", (req, res)=>{
+	console.log(req.query.pkgId);
+	var connection = getConnection();
+
+	connection.connect( (err)=>{
+
+		if(err){
+			throw err;
+		}
+		var sql = "SELECT PkgDesc, PkgName FROM packages WHERE PackageId = " + req.query.pkgId;
+
+		connection.query(sql, (err, result, fields)=>{
+			if(err){
+				throw err;
+			}
+			var desc = "";
+			var title = "";
+			Object.keys(result).forEach(function(key) {
+				var row = result[key];
+				desc = row.PkgDesc;
+				title = row.PkgName;
+			});
+			
+			res.render("order", {desc : desc, title : title});
+		});
+	});
+	
+	
+});
+
+//This MUST be at the bottom of the page else it will override your page requests!
 app.use((req, res, next)=>{
 	res.status(404).render("404");
 });

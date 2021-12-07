@@ -28,12 +28,13 @@
 				<div class="row">
 					<% Object.keys(packagesTable).forEach(function(key){ %>
 						<% var row = packagesTable[key]; %>
+						<% var id = row.PackageId; %>
 						<% var thumb = row.PkgThumbnail; %>
 						<% var title = row.PkgName; %>
 						<% var desc = row.PkgDesc; %>
 						<% var price = new Intl.NumberFormat("en-CA", { style: 'currency', currency: 'CAD' }).format(row.PkgBasePrice); %>
-						<% var sDate = dayjs(row.PkgStartDate).format("MMM D YYYY"); %>
-						<% var eDate = dayjs(row.PkgEndDate).format("MMM D YYYY"); %>
+						<% var sDate = dayjs(row.PkgStartDate).format("MMM D, YYYY"); %>
+						<% var eDate = dayjs(row.PkgEndDate).format("MMM D, YYYY"); %>
 
 						<div class='col-md-4'>
 							<div class="card mb-4 box-shadow">
@@ -41,9 +42,15 @@
 								<div class="card-body">
 									<%- "<h2 class='p-2 card-text text-center'>" + title + "</h2>" %>
 									<%- "<h5 class='card-text text-center text-muted'>" + desc + "</h5>" %>
-									<div class="d-flex justify-content-center align-items-center">
+									<div class="d-flex col-flex justify-content-center align-items-center">
 										<div class="col d-flex justify-content-center p-4">
-											<button type="button" class="btn btn-lg btn-success">Book Now!</button>
+											<form action="/order" method="get">
+
+												<input type="submit" value="Book Now!" class="btn btn-lg btn-success"></input>
+												<%- "<input type='text' style='visibility: hidden; width: 0; height: 0' name='pkgId' value=" + id + ">" %>
+												
+											</form>
+											
 										</div>
 										<div class="col p-4">
 											<%- "<h5 class='card-text text-center'>" + price + " CAD</h5>" %>
