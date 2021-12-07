@@ -16,7 +16,7 @@ var FileAPI = require('file-api')
 
 //Table that is served to the client
 let packagesTable = {};
-let agenciesTable = {};
+let agenciesTable = new Array();
 
 app.use(express.static("public", { "extensions": ["css", "js"] }));
 app.use(express.static("views", { "extensions": ["html", "htm"] }));
@@ -64,19 +64,47 @@ app.get("/contact", (req, res)=>{
 		if(err){
 			throw err;
 		}
-		var sql = "select agencies.AgencyId, agencies.AgncyAddress, agencies.AgncyCity,agencies.AgncyProv, agencies.AgncyPostal, agencies.AgncyCountry, agencies.AgncyPhone, agencies.AgncyFax, agents.AgtFirstName, agents.AgtLastName, agents.AgtBusPhone, agents.AgtEmail, agents.AgtPosition from agencies join agents on agents.AgencyId = agencies.AgencyId where agents.AgencyId = agencies.AgencyId order by agencies.agencyid";
-
+		var sql = "select agencies.AgencyId, agencies.AgncyAddress, agencies.AgncyCity,agencies.AgncyProv, " 
+					+ "agencies.AgncyPostal, agencies.AgncyCountry, agencies.AgncyPhone, agencies.AgncyFax, " 
+					+ "agents.AgtFirstName, agents.AgtLastName, agents.AgtBusPhone, agents.AgtEmail, "
+					+ "agents.AgtPosition, agents.AgtMiddleInitial " 
+					+ "from agencies join agents on agents.AgencyId = agencies.AgencyId " 
+					+ "where agents.AgencyId = agencies.AgencyId order by agencies.agencyid";
+		console.log(sql);
 		connection.query(sql, (err, result, fields)=>{
 			if(err){
 				throw err;
 			}
-
-			agenciesTable = result;	
-			console.log(agenciesTable);
+			let arr = new Array();
+			let innerArr = new Array();
+			var i = -1;
+			var j = 0;
+			var lastId = -1;
+			Object.keys(result).forEach(function(key){
+				var row = result[key];
+				if(row.AgencyId != lastId){
+					lastId = row.AgencyId;
+					
+					if(i != -1){
+						
+						arr[i] = innerArr;
+						innerArr = new Array();
+						j = 0;
+					}
+					
+					i++;
+					
+				}
+				
+				innerArr[j++] = row;
+			});	
+			arr[i] = innerArr;
+			agenciesTable = arr;	
+			res.render("contact", {agenciesTable: agenciesTable, dayjs: dayjs});
 		});
 	});
 	
-	res.render("contact", {agenciesTable: agenciesTable, dayjs: dayjs});
+	
 });
 
 app.get("/order", (req, res)=>{
@@ -88,7 +116,7 @@ app.get("/order", (req, res)=>{
 		if(err){
 			throw err;
 		}
-		var sql = "SELECT PkgDesc, PkgName FROM packages WHERE PackageId = " + req.query.pkgId;
+		//var sql = "SELECT PkgDesc, PkgName, PkgThumbnail FROM packages WHERE PackageId = " + req.query.pkgId;
 
 		connection.query(sql, (err, result, fields)=>{
 			if(err){
@@ -96,13 +124,49 @@ app.get("/order", (req, res)=>{
 			}
 			var desc = "";
 			var title = "";
+			var thumb = "";
+
 			Object.keys(result).forEach(function(key) {
 				var row = result[key];
 				desc = row.PkgDesc;
 				title = row.PkgName;
+				thumb = row.PkgThumbnail;
+
 			});
 			
-			res.render("order", {desc : desc, title : title});
+			res.render("order", {desc : desc, title : title, thumb : thumb});
+		});
+	});
+	
+	
+});
+
+app.post("/submit-order", (req, res)=>{
+	console.log("submit order");
+	var connection = getConnection();
+
+	connection.connect( (err)=>{
+
+		if(err){
+			throw err;
+		}
+
+		/*
+			BookingDate
+			BookingNo ???
+			TravelerCount
+			CustomerId
+			TripTypeId- Trip Types: Business, Group, Leisure
+			PackageId
+
+		*/
+		var sql = "INSERT INTO bookings (";
+
+		connection.query(sql, (err, result, fields)=>{
+			if(err){
+				throw err;
+			}
+			
 		});
 	});
 	
