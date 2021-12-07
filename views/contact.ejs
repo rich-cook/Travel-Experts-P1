@@ -15,28 +15,28 @@
 	<div class="container">
 		
 
-		<% for(i=0; i<agenciesTable.length; i++){ %>
-			<% var row = agenciesTable[i][0] %>
-			<% var agncyAddress = row.AgncyAddress %>
-			<% var agncyCity = row.AgncyCity %>
-			<% var agncyProv = row.AgncyProv %>
-			<% var agncyPostal = row.AgncyPostal %>
-			<% var agncyCountry = row.AgncyCountry %>
-			<% var agncyPhone = row.AgncyPhone %>
-			<% var agncyFax = row.AgncyFax %>
-			
-			<div class="row" style=" padding:30px 20px;">
-				<div class="col-md-3">
-					<h1>Agency Info:</h1>
-					<h4><%- agncyCity %>, <%- agncyProv %></h4>
-					<ol>
-						<li><%- agncyAddress %></li>
-						<li><%- agncyPostal %></li>
-						<li><%- agncyPhone %></li>
-						<li><%- agncyFax %></li>
-					</ol>
-				</div>
-			</div>
+
+		<% Object.keys(agenciesTable).forEach(function(key){ %>
+			<% var row = agenciesTable[key]; %>
+			<% var address = row.AgncyAddress; %>
+			<% var city = row.AgncyCity; %>
+			<% var postal = row.AgncyPostal; %>
+			<% var country = row.AgncyCountry; %>
+			<% var prov = row.AgncyProv; %>
+			<% var phone = row.AgncyPhone; %>
+			<% var fax = row.AgncyFax; %>
+			<div><%- address %></div>
+			<div><%- city %></div>
+			<div><%- postal %></div>
+			<div><%- country %></div>
+			<div><%- prov %></div>
+			<div><%- phone %></div>
+			<div><%- fax %></div>
+
+
+			<div class="container">
+
+
 				<div class="row">
 				<% for(j=0; j<agenciesTable[i].length; j++){ %>
 					<% var row1 = agenciesTable[i][j] %>
@@ -64,7 +64,22 @@
 				</div>
 		<% } %>
 
-		
+
+				<div class="row" style=" padding:30px 20px;">
+					<div class="col-md-3">
+						<h4><%- city %></h4>
+						<ol>
+							<li><%- address %></li>
+							<li><%- postal %></li>
+							<li><%- prov %></li>
+							<li><%- country %></li>
+							<li><%- phone %></li>
+							<li><%- fax %></li>
+						</ol>
+					</div>
+				</div>
+			<% }); %>
+
 
 
 	</div>
