@@ -17,9 +17,8 @@
     <link type="text/css" href="/masterstyle.css" rel="stylesheet">
     <script>
       
-				
-			function validate()
-            {
+    function validate(){
+      
 				document.getElementById("message").innerHTML = "";
 				var form1 = document.forms[0];
 				var message = "";
@@ -29,7 +28,11 @@
 					message += "Customer ID must have a value";
 					form1.CustomerId.focus();
 				}
-				
+        if (form1.Password.value == "")
+				{
+					message += "Password must have a value";
+					form1.Password.focus();
+				}
 				if (form1.TripTypeId.value == "")
 				{
 					message += "Trip Type must have a value";
@@ -78,7 +81,7 @@
       
       <br />      
       
-      <%- "<img src=images/" + thumb + " />" %>
+      
         <div class="container col-xxl-8 px-4 py-5">
           <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
             <div class="col-10 col-sm-8 col-lg-6">
@@ -91,26 +94,34 @@
               <p class="lead mb-lg-5">Fill out the form to complete the transaction</p>
 
               <!-- whatever you want to call the action -->
-              <form method="post" action="/customerform">
-                <div class = "row-cols-2"
+              <form method="post" action="/customerform" class="needs-validation" novalidate>
+                <div class = "row-cols-2">
                   <label for = "CustomerId">Customer ID:</label>
-                  <input type="text" name="CustomerId" id="CustomerId" /><br />
+                  <input type="text" class="form-control" name="CustomerId" id="CustomerId" /><br />
                 </div>
                 <div class = "col-md-10 mt-3"></div>
                 
-                 <!--  <label for="Password">Password:</label>
-                  <input type="text" name="Password" id="Password"/><br />
-                  <div class = "col-md-10 mt-3"></div> -->
+                 <label for="Password">Password:</label>
+                  <input type="text" class="form-control" name="Password" id="Password"/><br />
+                  <div class = "col-md-10 mt-3"></div>
 
                  <!--  
                   <label for="TravellerAccount">Traveller Account:</label>
-                  <input type="text" name="TravellerAccount" id="TravellerAccount"/><br />
- -->
+                  <input type="text" name="TravellerAccount" id="TravellerAccount"/><br /> -->
                   <div class = "col-md-10 mt-3"></div>
 
-                  <div class="form-group">
+                 
 
-                    <label for="TripTypeId">Select from List:</label>
+                  <div class = "col-md-10 mt-3"></div>
+
+                  <label for="UserName">User Name</label>
+                  <input type="text" class="form-control" name="UserName" id="UserName" /><br />
+
+                  <div class = "col-md-10 mt-3"></div>
+
+                  <div>
+
+                    <label for="TripTypeId">Trip Type:</label>
                     <select class="form-control" id="TripTypeId">
                       <option>Business</option>
                       <option>Group</option>
@@ -118,15 +129,7 @@
                     </select>
                     <br>
                   </div>
-
-                  <div class = "col-md-10 mt-3"></div>
-
-                  <label for="UserName">User Name</label>
-                  <input type="text" name="UserName" id="UserName" /><br />
-
-                  <div class = "col-md-10 mt-3"></div>
-
-                  <div class="form-group">
+                  <div>
 
                     <label for="TravelerCount">Number of Travelers:</label>
                     <select class="form-control" id="TravelerCount">
