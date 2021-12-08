@@ -13,6 +13,19 @@
 		<%- include("partials/header.ejs"); %>
 	</header>
 	<div class="container">
+	  
+	  <div class="row">
+	     <div class="col-md-4">
+		 </div>
+	     <div class="col-md-4">
+		    <h1 style=" text-align: center; color:#34568B;">Agency Info:</h1> 
+		 </div>
+	     <div class="col-md-4">
+		 </div>
+	  </div>
+	  
+	</div>
+	<div class="container">
 		<% for(i=0; i<agenciesTable.length; i++){ %>
 			<% var row = agenciesTable[i][0] %>
 			<% var agncyAddress = row.AgncyAddress %>
@@ -24,17 +37,18 @@
 			<% var agncyFax = row.AgncyFax %>
 
 			<div class="row" style=" padding:30px 20px;">
-				<div class="col-md-3">
+			    <div class="col-md-4"></div>
+				<div class="col-md-4"  style=" box-shadow: 5px 5px 5px 5px #888888; text-align: center; background-color: #FFF3EA;">
 
-					<h1>Agency Info:</h1>
 					<h4><%- agncyCity %>, <%- agncyProv %></h4>
 					<ol>
 						<li><%- agncyAddress %></li>
 						<li><%- agncyPostal %></li>
+						<li><%- agncyProv %></li>
 						<li><%- agncyPhone %></li>
-						<li><%- agncyFax %></li>
 					</ol>
 				</div>
+				<div class="col-md-4"></div>
 			</div>
 			<div class="row">
 				<% for(j=0; j<agenciesTable[i].length; j++){ %>
@@ -45,8 +59,8 @@
 					<% var agtBusPhone = row1.AgtBusPhone %>
 					<% var agtEmail = row1.AgtEmail %>
 					<% var agtPosition = row1.AgtPosition %>
-
-					<div class="col-md-3">
+                    
+					<div class="col-md-3"  style=" padding:30px 20px; box-shadow: 3px 3px 3px 3px #888888;">
 						<ol>
 							<li><%- agtFirstName %></li>
 							<li><%- agtMiddleInitial %></li>
@@ -64,3 +78,7 @@
 </body>
 
 </html>
+
+<footer>
+		<%- include("partials/footer.ejs"); %>
+</footer>

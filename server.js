@@ -174,6 +174,10 @@ app.post("/submit-order", (req, res)=>{
 	
 });
 
+app.get("/register", (req, res)=>{
+	res.render("register");
+});
+
 //This MUST be at the bottom of the page else it will override your page requests!
 app.use((req, res, next)=>{
 	res.status(404).render("404");
