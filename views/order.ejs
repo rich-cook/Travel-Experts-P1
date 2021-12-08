@@ -1,19 +1,24 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <%- include("partials/head"); %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="OOSD Fall 2021">
     <meta name="author" content="RCook">
-    <title>Order - Travel Experts</title>
+    <title>Travel Experts Order Form</title>
     
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/heroes/">
+        
+    
 
-    <link type="text/css" href="/bootstrapexample.css" rel="stylesheet">
-    <script type="text/javascript">
+    <!--Bootstrap core CSS -->
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link type="text/css" href="/masterstyle.css" rel="stylesheet">
+    <script>
       
-				
-			function validate()
-            {
+    function validate(){
+      
 				document.getElementById("message").innerHTML = "";
 				var form1 = document.forms[0];
 				var message = "";
@@ -23,32 +28,28 @@
 					message += "Customer ID must have a value";
 					form1.CustomerId.focus();
 				}
-				
-				if (form1.Password.value == "")
+        if (form1.Password.value == "")
 				{
 					message += "Password must have a value";
 					form1.Password.focus();
 				}
-				
-				if (form1.TravellerAccount.value == "")
+				if (form1.TripTypeId.value == "")
 				{
-					message += "Travel Account must have a value";
-					form1.TravellerAccount.focus();
+					message += "Trip Type must have a value";
+					form1.TripTypeId.focus();
 				}
-                if (form1.CustNumber.value == "")
+				
+				if (form1.UserName.value == "")
+				{
+					message += "User Name Account must have a value";
+					form1.UserName.focus();
+				}
+        if (form1.TravelerCount.value == "")
 				{
 					message += "This must have a number";
-					form1.CustNumber.focus();
+					form1.TravelerCount.focus();
 				}
-				else
-				{
-					var reg = ^\d+$;
-					if (!reg.test(form1.CustNumber.value))
-					{
-						message += "Traveller Number has an invalid format";
-						form1.CustNumber.focus();
-					}
-				}
+				
 				
 				if (message != "")
 				{
@@ -66,75 +67,106 @@
     
     </head>
     <body>
-        <header>
-            <%- include("partials/header"); %>
-        </header>
-        <%- title %>
-        <br />      
-        <%- desc %>
-        <%- "<img src=images/" + thumb + " />" %>
-
-
-        <div class="container col-xl-10 col-xxl-8 px-4 py-5">
-            <div class="row align-items-center g-lg-5 py-5">
-                <div class="col-md-10 mx-auto col-lg-5">
-                    <h4 class="mb-3">Billing</h4>
-                    
-                    <!-- whatever you want to call the action -->
-                <form method="post" action="/submit-order">
-                    <label for="CustomerId">Customer ID:</label>
-                    <input type="text" name="CustomerId" id="CustomerId" /><br />
-                    
-                    <label for="Password">Password:</label>
-                    <input type="text" name="Password" /><br />
-                    
-                    <label for="TravellerAccount">Traveller Account:</label>
-                    <input type="text" name="TravellerAccount" id="TravellerAccount" /><br />
-
-                    <label for="CustNumber">Number of People:</label>
-                    <input type="text" name="CustNumber" id="CustNumber" /><br />
-
-                    <label for="PaymentMethod">Payment Method:</label>
-                    <input type="text" name="PaymentMethod" id="PaymentMethod" /><br />
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                        <label class="form-check-label" for="exampleRadios1">
-                          Credit Card
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                        <label class="form-check-label" for="exampleRadios2">
-                          Bank Payment
-                        </label>
-                      </div>
-
-                      <button>Send</button>
-                    </form>
-                </div>
-                <div class="col-md-10 mx-auto col-lg-5">
-                    <h4 class="mb-3">Booking Record</h4>
-                
-                </div>
+      <header>
+        <%- include("partials/header"); %>
+      </header>
+      
+      <br />      
+      
+      
+        <div class="container col-xxl-8 px-4 py-5">
+          <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+            <div class="col-10 col-sm-8 col-lg-6">
+              <%- "<img class='d-block mx-lg-auto img-fluid' src=images/" + thumb + ">" %>
+              
+              <%- '<h3 class="display-5 mb-3">' + title + '</h3>' %>
+              <%- '<p class="lead mb-lg-5">' + desc + '</p>' %>
             </div>
-        </div>
-    
+            <div class="col-lg-6">
+              <h3 class="display-5 mb-3">Billing Form</h3>
+              <p class="lead mb-lg-5">Fill out the form to complete the transaction</p>
 
-
-
-        <div class= "container-md">
-            <div class="row">
-               <div class="col-md-8 col-lg-8">
+              <!-- whatever you want to call the action -->
+              <form method="post" action="/submit-order">
+                <%- "<input type='hidden' name='pkgId' value=" + pkgId + " >" %>
                 
+                <div class = "row-cols-2">
+                  <label for="CustomerId">User Name:</label>
+                  <input type="text" name="CustomerId" id="CustomerId" /><br />
                 </div>
+                <div class = "col-md-10 mt-3"></div>
+                
+                 <label for="Password">Password:</label>
+                  <input type="password" class="form-control" name="Password" id="Password"/><br />
+                  <div class = "col-md-10 mt-3"></div>
+
+                 <!--  
+                  <label for="TravellerAccount">Traveller Account:</label>
+                  <input type="text" name="TravellerAccount" id="TravellerAccount"/><br /> -->
+                  <div class = "col-md-10 mt-3"></div>
+
+                 
+
+                  <div class = "col-md-10 mt-3"></div>
+
+
+
+                  <div class = "col-md-10 mt-3"></div>
+
+                  <div>
+
+                    <label for="TripTypeId">Trip Type:</label>
+                    <select class="form-control" name="TripTypeId" id="TripTypeId">
+                      <option>Business</option>
+                      <option>Group</option>
+                      <option>Leisure</option>
+                    </select>
+                    <br>
+                  </div>
+                  <div>
+
+                    <label for="TravelerCount">Number of Travelers:</label>
+                    <select class="form-control" name="TravelerCount" id="TravelerCount">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                      <option>7</option>
+                      <option>8</option>
+                      <option>9</option>
+                      <option>10</option>
+                    </select>
+                    <br>
+                  </div>
+
+                  
+                  <div class = "col-md-10 mt-3"></div>
+
+                <!--   <div class="form-check mt-2 mb-2">
+                      <input class="form-check-input" type="radio" name="PaymentMethod1" id="PaymentMethod1" value="option1" checked>
+                      <label class="form-check-label" for="PaymentMethod1">Credit Card</label>
+                  </div>
+                  <div class="form-check mb-4">
+                      <input class="form-check-input" type="radio" name="PaymentMethod2" id="PaymentMethod2" value="option2">
+                      <label class="form-check-label" for="PaymentMethod2">Bank Payment</label>
+                  </div> -->
+
+                      <div class="d-grid gap-4 d-md-flex justify-content-md-start">
+                        <input type="submit" class="btn btn-primary btn-lg px-4 me-md-2"></input>
+                        <button type="reset" class="btn btn-outline-secondary btn-lg px-4" onclick="return confirm('did you really want to reset?');">Reset</button>
+                      </div>
+                  </form>
             </div>
+          </div>
         </div>
+      
 
-    <footer>
-        <%- include("partials/footer"); %>
-
-    </footer>
 
     </body>
+    <footer>
+			
+      <%- include("partials/footer"); %>
+    </footer>
 </html>

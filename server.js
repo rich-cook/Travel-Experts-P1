@@ -13,6 +13,10 @@ var FileAPI = require('file-api')
 , File = FileAPI.File
 , FileList = FileAPI.FileList
 ;
+var bodyParser = require("body-parser");
+var jsonParser = bodyParser.json();
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
 
 //Table that is served to the client
 let packagesTable = {};
@@ -35,6 +39,7 @@ var getConnection = ()=>{
 };
 
 app.get("/", (req, res)=>{
+	console.log(req.body);
 	var connection = getConnection();
 
 	connection.connect( (err)=>{
@@ -107,7 +112,7 @@ app.get("/contact", (req, res)=>{
 });
 
 app.get("/order", (req, res)=>{
-	console.log(req.query.pkgId);
+	var pkgId = req.query.pkgId;
 	var connection = getConnection();
 
 	connection.connect( (err)=>{
@@ -115,7 +120,7 @@ app.get("/order", (req, res)=>{
 		if(err){
 			throw err;
 		}
-		var sql = "SELECT PkgDesc, PkgName, PkgThumbnail FROM packages WHERE PackageId = " + req.query.pkgId;
+		var sql = "SELECT PkgDesc, PkgName, PkgThumbnail FROM packages WHERE PackageId = " + pkgId;
 
 		connection.query(sql, (err, result, fields)=>{
 			if(err){
@@ -133,16 +138,15 @@ app.get("/order", (req, res)=>{
 
 			});
 			
-			res.render("order", {desc : desc, title : title, thumb : thumb});
+			res.render("order", {desc : desc, title : title, thumb : thumb, pkgId: pkgId});
 		});
 	});
 	
 	
 });
 
-app.post("/submit-order", (req, res)=>{
-	console.log("submit order");
-	console.log(req.body.CustomerId);
+app.post("/submit-order", urlencodedParser, (req, res)=>{
+	console.log(req.body.pkgId);
 	var connection = getConnection();
 
 	connection.connect( (err)=>{
@@ -153,22 +157,28 @@ app.post("/submit-order", (req, res)=>{
 
 		/*
 			BookingDate
-			BookingNo ???
 			TravelerCount
 			CustomerId
 			TripTypeId- Trip Types: Business, Group, Leisure
 			PackageId
-
 		*/
+		var pkgId = req.body.pkgId;
+		var custId = req.body.CustomerId;
+		var travCount = req.body.TravelerCount;
+		var tripType = req.body.TripTypeId;
+		console.log(dayjs().format("YYYY-MM-DD HH:MM:ss"));
 		
-		//var sql = "INSERT INTO bookings (";
+		
+		var sql = "INSERT INTO bookings (BookingDate, TravelerCount, CustomerId, TripTypeId) VALUES (?,?,?,?)";
+		var values = [dayjs().format(),travCount, 104, tripType.charAt(0)];
 
-		connection.query(sql, (err, result, fields)=>{
+		connection.query(sql, values, (err, result, fields)=>{
 			if(err){
 				throw err;
 			}
 			
 		});
+		return res.redirect("/");
 	});
 	
 	
