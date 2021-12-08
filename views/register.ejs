@@ -2,46 +2,14 @@
 
 <html lang=en>
 	<head>
-		<meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Tales of Time Travel Registration</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <link rel="stylesheet" type= "text/css" href="masterstyle.css" >
+		<%- include("partials/head"); %>
+        <title>Registration - Travel Experts</title>
+        
 	</head>
 	<body>
-	
-	        <div class = "container-fluid">
-                <nav class="navbarbg navbar navbar-expand-sm navbar-light" id="navbarbg" >
-                    <div class="container-fluid" style="padding: 10px;">
-                        <a class="navbar-brand" href="#">Travel Experts</a>
-                <!--aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" data-bs-target="#navbarCollapse"-->
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse">
-                        <span class="navbar-toggler-icon"></span>
-                        </button>
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <!--me-auto mb-2 mb-md-0-->
-                        <ul class="navbar-nav mb-md-1">
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.html">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="vacationpackages.html">Vacation Packages</a>
-                            </li>
-                            <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="register.html">Register</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contact</a>
-                            </li>
-                        </ul>
-                    </div>
-                    </div>
-                </nav>
-        </div>
-	
+		<header>
+			<%- include("partials/header"); %>
+		</header>
 		<div class="p-2 p-md-5 border rounded-3 bg-light">
 			<section class="h-100 h-custom" style="background: linear-gradient(360deg,#ffff00 ,#00aeff);">
 			  <div class="container py-5 h-100">
@@ -117,4 +85,5 @@
 				</div>
 			  </div>
 			</section>
+		<%- include("partials/footer"); %>
 </html>
