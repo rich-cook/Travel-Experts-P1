@@ -6,8 +6,8 @@
 
 	Authors: Alex/Richard- Configurations we needed for our pages
 			 Alex- Comments + mostly everything else
-			 Richard- SQL statement for Contact page, dayjs for home page, random additions
-
+			 Richard- SQL statement for Contact page, dayjs for home page, random additions. 
+	Note that Register page was originated by Rasheed, and the post statements, sql , and records insert was done via pair (via Richard/Alex) programming, but code was never submitted by Rasheed.
 */
 
 //Declarations and basic configuration
