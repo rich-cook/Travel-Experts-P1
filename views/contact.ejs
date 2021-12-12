@@ -1,3 +1,11 @@
+<!-- 	SAIT Fall 2021 Group 2
+	Alex, Jaspal, Rasheed, Richard
+-->
+<!-- Contact page
+	Authors: Alex Cress - EJS, comments. Adapted HMTL structure from original HTML (see: contact-old.html)
+			 Japal Bhatti - Original HTML structure, CSS
+-->
+
 <!DOCTYPE html>
 <html>
 
@@ -12,6 +20,7 @@
 	<header>
 		<%- include("partials/header.ejs"); %>
 	</header>
+	<!-- Page title -->
 	<div class="container">
 	  
 	  <div class="row">
@@ -25,9 +34,12 @@
 	  </div>
 	  
 	</div>
+	<!-- Main container -->
 	<div class="container">
+		<!-- Outer Loop -->
 		<% for(i=0; i<agenciesTable.length; i++){ %>
-			<% var row = agenciesTable[i][0] %>
+			<!-- Variable declarations -->
+			<% var row = agenciesTable[i][0] %> <!-- Table/row is assumed to not be empty/null -->
 			<% var agncyAddress = row.AgncyAddress %>
 			<% var agncyCity = row.AgncyCity %>
 			<% var agncyProv = row.AgncyProv %>
@@ -36,6 +48,7 @@
 			<% var agncyPhone = row.AgncyPhone %>
 			<% var agncyFax = row.AgncyFax %>
 
+			<!-- Display/format the agency information -->
 			<div class="row" style=" padding:30px 20px;">
 			    <div class="col-md-4"></div>
 				<div class="col-md-4"  style=" box-shadow: 5px 5px 5px 5px #888888; text-align: center; background-color: #FFF3EA;">
@@ -51,7 +64,9 @@
 				<div class="col-md-4"></div>
 			</div>
 			<div class="row">
+				<!-- Inner loop -->
 				<% for(j=0; j<agenciesTable[i].length; j++){ %>
+					<!-- Variable declarations -->
 					<% var row1 = agenciesTable[i][j] %>
 					<% var agtFirstName = row1.AgtFirstName %>
 					<% var agtMiddleInitial = row1.AgtMiddleInitial %>
@@ -60,6 +75,7 @@
 					<% var agtEmail = row1.AgtEmail %>
 					<% var agtPosition = row1.AgtPosition %>
                     
+                    <!-- Display/format each agent info -->
 					<div class="col-md-3"  style=" padding:30px 20px; box-shadow: 3px 3px 3px 3px #888888;">
 						<ol>
 							<li><%- agtFirstName %></li>
@@ -71,8 +87,10 @@
 							<li><%- agtPosition %></li>
 						</ol>
 					</div>
+				<!-- End inner loop -->
 				<% } %>
 			</div>
+		<!-- End outer loop -->
 		<% } %>
 	</div>
 </body>
